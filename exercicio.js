@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 let alunos = [
     { nome: "Ana", notas: [8, 7, 9] },
     { nome: "Rhanna", notas: [9, 6, 4] },
@@ -57,7 +59,61 @@ function situacao(media) {
 console.log(media);
 console.log(situacao(media));
 
-console.log(buscarAluno("Rhanna"));
 
-  buscarAluno("Rhanna");
-calcularMedia(aluno);
+
+
+function cadastrarAluno() {
+    let nome = prompt("Digite o nome do aluno:");
+
+    let aluno = buscarAluno(nome);
+
+    if (aluno) {
+        console.log("Aluno já cadastrado!");
+        return;
+    }
+
+    alunos.push({
+        nome: nome,
+        notas: []
+    });
+
+    console.log("Aluno cadastrado com sucesso!");
+}
+
+
+function listarAlunos() {
+    if (alunos.length === 0) {
+        console.log("Nenhum aluno cadastrado");
+        return;
+    }
+
+    let texto = "Alunos cadastrados:\n";
+
+    for (let i = 0; i < alunos.length; i++) {
+        texto += alunos[i].nome + "\n";
+    }
+
+    console.log(texto);
+}
+
+
+function removerAluno() {
+    let nome = prompt("Digite o nome do aluno que deseja remover:");
+
+    let aluno = buscarAluno(nome);
+
+    if (!aluno) {
+        console.log("Aluno não encontrado!");
+        return;
+    }
+
+    let posicao = alunos.indexOf(aluno);
+    alunos.splice(posicao, 1);
+
+    console.log("Aluno removido com sucesso!");
+}
+
+
+
+cadastrarAluno();
+
