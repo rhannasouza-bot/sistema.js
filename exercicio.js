@@ -114,6 +114,57 @@ function removerAluno() {
 }
 
 
-
 cadastrarAluno();
 
+
+
+
+
+
+function lancarNota() {
+    let nome = prompt("Digite o nome do aluno: ");
+
+    let aluno = buscarAluno(nome);
+
+    if (!aluno) {
+        console.log("Aluno não encontrado!");
+        return;
+    }
+
+    let nota = Number(prompt("Digite a nota: "));
+
+    if (nota < 0 || nota > 10) {
+        console.log("Nota inválida!");
+        return;
+    }
+
+    aluno.notas.push(nota);
+
+    console.log("Nota lançada com sucesso!");
+}
+
+function verBoletim() {
+    let nome = prompt("Digite o nome do aluno: ");
+
+    let aluno = buscarAluno(nome);
+
+    if (!aluno) {
+        console.log("Aluno não encontrado!");
+        return;
+    }
+
+    let media = calcularMedia(aluno);
+    let status = situacao(media);
+
+    console.log("\n===== BOLETIM =====");
+    console.log("Nome: " + aluno.nome);
+    console.log("Notas: " + aluno.notas.join(", "));
+    console.log("Média: " + media.toFixed(2));
+    console.log("Situação: " + status);
+}
+
+listarAlunos();
+
+lancarNota();
+
+verBoletim();
